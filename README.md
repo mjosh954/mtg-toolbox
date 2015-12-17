@@ -24,3 +24,4 @@ Open browser to http://localhost:3000
   - [ ] Randomize Match ups
 - [ ] Improve Styling
 - [ ] Improve README.md for Contributing
+- [ ] [Tests... Tests everywhere] (http://cdn.meme.am/instances/500x/59621256.jpg)
