@@ -58,10 +58,12 @@ export default class Dice extends React.Component {
         <FlatButton style={{width: `${this.props.buttonWidth}px`}} label='Dice' onTouchTap={() => this.toggleDiceDialog() }/>
         <Dialog modal open={this.state.diceDialogOpen} onRequestClose={() => this.setState({diceDialogOpen: false})} actions={[<RaisedButton
           label='Close' onTouchTap={() => this.toggleDiceDialog(true)} />]}>
-          <h2>Dice Result: {this.state.diceResult}</h2>
-          <List style={{border: '1px solid #d4d4d4'}} subheader='Dice Settings'>
-            <ListItem style={{textAlign: 'left'}}>
-              <Toggle label='20 Sided'
+          <div style={{textAlign: 'center'}}>
+            <h2>Dice Result: <span style={{fontSize: '2em', marginLeft: '10px'}}>{this.state.diceResult}</span></h2>
+          </div>
+          <List style={{border: '1px solid #d4d4d4', textAlign: 'left'}} subheader='Dice Settings'>
+            <ListItem >
+              <Toggle label='20 Sided' labelPosition={'left'}
                 onToggle={() => this.setState({enable20SidedDie: !this.state.enable20SidedDie})}
                 value={this.state.enable20SidedDie}
                 />

@@ -21,21 +21,19 @@ export default class Matchup extends React.Component {
     } = this.props;
     const playerList = players.map((player, index) => {
       return (
-          <Player key={index} name={player.name} life={player.life}
-            editNameMode={player.editName}
+          <Player key={index} player={player}
             handleAddLife={() => handleAddLife({index, value: 1})}
             handleRemoveLife={() => handleAddLife({index, value: -1})} />
       );
     });
     return (
-      <Card style={{width: '500px', margin: '20px', paddingBottom: '20px'}}>
+      <Card style={{margin: '20px', paddingBottom: '20px'}}>
         <AppBar style={{backgroundColor: '#4e4e4e', textAlign: 'center'}} title={`Round ${round}`} showMenuIconButton={false}
           iconElementRight={
             <MatchupMenu
               handleNextRoundEvent={handleNextRound}
-              handleAddPlayerEvent={handleAddPlayer}
-              disableAddPlayer={players.length >= 8}
-              />
+              handleAddPlayerEvent={() => handleAddPlayer(`Player ${players.length + 1}`)}
+              disableAddPlayer={players.length >= 8} />
           }/>
         <div style={{textAlign: 'center'}}>
           {playerList}

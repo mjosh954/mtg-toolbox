@@ -14,9 +14,9 @@ export default class MatchupMenu extends React.Component {
     const MenuItem = require('material-ui/lib/menus/menu-item');
     return (
       <IconMenu style={{textAlign: 'left'}}
-        iconButtonElement={<IconButton iconStyle={{color: 'white'}}><MoreVertIcon style={{color: 'white'}}/></IconButton>}>
+        iconButtonElement={<IconButton><MoreVertIcon style={{color: 'white'}}/></IconButton>}>
         <MenuItem primaryText='Next Round' onClick={() => this.props.handleNextRoundEvent()} />
-        <MenuItem primaryText='Add Player' disabled={this.props.disableAddPlayer} onClick={() => this.props.handleAddPlayerEvent()} />
+        <MenuItem primaryText='Add Player' disabled={this.props.disableAddPlayer} onClick={this.props.handleAddPlayerEvent} />
         <MenuItem primaryText='Reset Matchup' />
       </IconMenu>
     );

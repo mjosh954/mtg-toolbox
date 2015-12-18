@@ -5,8 +5,7 @@ import Avatar from 'material-ui/lib/avatar';
 
 export default class Player extends React.Component {
   static propTypes = {
-    name: PropTypes.string,
-    life: PropTypes.number,
+    player: PropTypes.object,
     handleAddLife: PropTypes.func,
     handleRemoveLife: PropTypes.func,
     editNameMode: PropTypes.bool,
@@ -19,7 +18,7 @@ export default class Player extends React.Component {
   }
 
   getLifeThresholdColor (life) {
-    if (life > 13) {
+    if (life > 10) {
       return '#11772d';
     }
     if (life > 5) {
@@ -29,20 +28,30 @@ export default class Player extends React.Component {
   }
 
   render () {
-    const { name, life, handleAddLife, handleRemoveLife } = this.props;
-    const IconButton = require('material-ui/lib/icon-button');
+    const {
+      player: {
+        life,
+        name
+      },
+      handleAddLife,
+      handleRemoveLife
+    } = this.props;
+
+    const IconMenu = require('material-ui/lib/menus/icon-menu');
+    const MenuItem = require('material-ui/lib/menus/menu-item');
+    const playerMenu = (
+      <IconMenu openDirection='bottom-right' desktop iconButtonElement={<i className='fa fa-sliders' style={{cursor: 'pointer'}} />}>
+        <MenuItem primaryText='Drop Player' />
+      </IconMenu>
+    );
     return (
       <Card style={{margin: '25px', textAlign: 'left'}}>
         <CardHeader avatar={<Avatar size={50} backgroundColor={this.getLifeThresholdColor(life)}>{life}</Avatar>}>
-          {name}
+          {name} &nbsp; {playerMenu}
         </CardHeader>
-        <div style={{textAlign: 'center'}}>
-          <IconButton iconClassName='material-icons' iconStyle={{color: 'green'}} onClick={handleAddLife}>
-            <i className='fa fa-plus'></i>
-          </IconButton> &nbsp;
-          <IconButton iconClassName='material-icons' iconStyle={{color: 'red'}}onClick={handleRemoveLife}>
-            <i className='fa fa-minus'></i>
-          </IconButton>
+        <div style={{paddingLeft: '10px'}}>
+          <i className='fa fa-plus fa-2x' style={{color: '#11772d', cursor: 'pointer'}} onClick={handleAddLife}></i>&nbsp;&nbsp;
+          <i className='fa fa-minus fa-2x' style={{color: '#ba0000', cursor: 'pointer'}} onClick={handleRemoveLife}></i>
         </div>
       </Card>
     );

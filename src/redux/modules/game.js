@@ -15,6 +15,7 @@ export const TOGGLE_EDIT_NAME_MODE = 'TOGGLE_EDIT_NAME_MODE';
 export const addPlayer = createAction(ADD_PLAYER, (value = 'player_name') => value);
 export const resetGame = createAction(RESET_GAME);
 export const addLife = createAction(ADD_LIFE);
+export const addPoison = createAction(ADD_POISON);
 export const toggleEditNameMode = createAction(TOGGLE_EDIT_NAME_MODE);
 export const newRound = createAction(NEW_ROUND);
 
@@ -22,6 +23,7 @@ export const actions = {
   addPlayer,
   resetGame,
   addLife,
+  addPoison,
   toggleEditNameMode,
   newRound
 };
@@ -49,7 +51,8 @@ export default handleActions({
     return Object.assign({}, state, {
       players: [...state.players, {
         name: payload,
-        life: 20
+        life: 20,
+        poisonCounter: 0
       }]
     });
   },
@@ -73,6 +76,18 @@ export default handleActions({
         if (payload.index === index) {
           return Object.assign({}, player, {
             life: player.life + payload.value
+          });
+        }
+        return player;
+      })
+    });
+  },
+  [ADD_POISON]: (state, { payload }) => {
+    return Object.assign({}, state, {
+      players: state.players.map((player, index) => {
+        if (payload.index === index) {
+          return Object.assign({}, player, {
+            poisonCounter: player.poisonCounter + payload.value
           });
         }
         return player;

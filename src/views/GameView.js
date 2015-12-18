@@ -28,13 +28,15 @@ export class GameView extends React.Component {
 
     return (
       <div>
-        <AppBar title={<Link to='/' style={{color: 'white'}}>MTG Toolbox</Link>} showMenuIconButton={false} style={{backgroundColor: '#262626'}} iconElementRight={<Dice />} />
-        <Matchup round={game.round}
-          players={game.players}
-          handleAddLife={addLife}
-          handleRemoveLife={addLife}
-          handleNextRound={newRound}
-          handleAddPlayer={addPlayer} />
+        <AppBar title={<Link to='/' style={{color: 'white', 'text-decoration': 'none'}}>MTG Toolbox</Link>} showMenuIconButton={false} style={{backgroundColor: '#262626'}} iconElementRight={<Dice />} />
+        <div style={{margin: 'auto', width: '600px', display: 'block'}}>
+          <Matchup round={game.round}
+            players={game.players}
+            handleAddLife={addLife}
+            handleRemoveLife={addLife}
+            handleNextRound={newRound}
+            handleAddPlayer={addPlayer} />
+        </div>
       </div>
     );
   }

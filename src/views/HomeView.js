@@ -8,10 +8,6 @@ import GitHubForkRibbon from 'react-github-fork-ribbon';
 import Dice from '../components/Dice';
 
 export class HomeView extends React.Component {
-  static propTypes = {
-    doubleAsync: React.PropTypes.func.isRequired,
-    increment: React.PropTypes.func.isRequired
-  }
 
   render () {
     return (
@@ -20,7 +16,7 @@ export class HomeView extends React.Component {
           <div style={{textAlign: 'center', margin: '20px'}}>
             <img src={require('../assets/magic_elements.png')} />
             <CardTitle title='MTG Toolbox' subtitle='A kit for all your MTG game needs.' />
-            <Link to='/game'><FlatButton style={{width: '150px'}} linkButton label='Game Counter' /></Link>
+            <FlatButton containerElement={<Link to='/game' />} style={{width: '150px'}} linkButton label='Game Counter' />
             <div style={{marginTop: '10px'}}>
               <Dice buttonWidth='150' style={{marginTop: '5px'}} />
             </div>

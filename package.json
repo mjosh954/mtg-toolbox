@@ -1,6 +1,6 @@
 {
   "name": "mtg-toolbox",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Toolbox for MTG games",
   "main": "index.js",
   "scripts": {
