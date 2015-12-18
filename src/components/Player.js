@@ -1,49 +1,50 @@
 import React, { PropTypes } from 'react';
+import Card from 'material-ui/lib/card/card';
+import CardHeader from 'material-ui/lib/card/card-header';
+import Avatar from 'material-ui/lib/avatar';
 
 export default class Player extends React.Component {
-
   static propTypes = {
     name: PropTypes.string,
     life: PropTypes.number,
-    handleIncrementLife: PropTypes.func,
-    handleDecrementLife: PropTypes.func,
+    handleAddLife: PropTypes.func,
+    handleRemoveLife: PropTypes.func,
     editNameMode: PropTypes.bool,
     handleEditNameModeToggle: PropTypes.func
   }
 
-  render () {
-    const { name, life, handleIncrementLife, handleDecrementLife, editNameMode, handleEditNameModeToggle } = this.props;
-    let playerName;
-    if (editNameMode) {
-      playerName = (
-        <div>
-          <form className='form-inline'>
-            <input type='text' className='form-control' value={name} />&nbsp;<a href='#'><i className='fa fa-times fa-2x' onClick={handleEditNameModeToggle}></i></a>
-          </form>
-        </div>);
-    } else {
-      playerName = <h4> {name} <a href='#' onClick={handleEditNameModeToggle}>&nbsp;<i className='fa fa-pencil'></i></a></h4>;
-    }
+  constructor (props) {
+    super(props);
+    this.getLifeThresholdColor = this.getLifeThresholdColor.bind(this);
+  }
 
+  getLifeThresholdColor (life) {
+    if (life > 13) {
+      return '#11772d';
+    }
+    if (life > 5) {
+      return '#f4aa00';
+    }
+    return '#ba0000';
+  }
+
+  render () {
+    const { name, life, handleAddLife, handleRemoveLife } = this.props;
+    const IconButton = require('material-ui/lib/icon-button');
     return (
-      <div className='player-container'>
-        <div className='col-md-6'>
-          { playerName }
-          <div className='row'>
-            <div className='col-xs-6'>
-              <h2>{life}</h2>
-            </div>
-            <div className='col-xs-6'>
-              <div className='row'>
-                <a href='#' className='life-link'><i className='fa fa-caret-square-o-up fa-2x' onClick={handleIncrementLife}></i></a>
-              </div>
-              <div className='row'>
-                <a href='#' className='life-link'><i className='fa fa-caret-square-o-down fa-2x' onClick={handleDecrementLife}></i></a>
-              </div>
-            </div>
-          </div>
+      <Card style={{margin: '25px', textAlign: 'left'}}>
+        <CardHeader avatar={<Avatar size={50} backgroundColor={this.getLifeThresholdColor(life)}>{life}</Avatar>}>
+          {name}
+        </CardHeader>
+        <div style={{textAlign: 'center'}}>
+          <IconButton iconClassName='material-icons' iconStyle={{color: 'green'}} onClick={handleAddLife}>
+            <i className='fa fa-plus'></i>
+          </IconButton> &nbsp;
+          <IconButton iconClassName='material-icons' iconStyle={{color: 'red'}}onClick={handleRemoveLife}>
+            <i className='fa fa-minus'></i>
+          </IconButton>
         </div>
-      </div>
+      </Card>
     );
   }
 }

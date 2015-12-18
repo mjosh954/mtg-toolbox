@@ -1,30 +1,59 @@
 import React, { PropTypes } from 'react';
 
 export default class OptionsBar extends React.Component {
+
   static propTypes = {
     handleResetGame: PropTypes.func.isRequired,
     handleAddPlayer: PropTypes.func.isRequired,
     disableNewPlayer: PropTypes.bool
   }
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      showAddPlayerDialog: false
+    };
+    this.toggleAddPlayerDialog = this.toggleAddPlayerDialog.bind(this);
+  }
+
+  toggleAddPlayerDialog (close) {
+    if (close) {
+      this.setState({ showAddPlayerDialog: false });
+      return;
+    }
+    this.setState({ showAddPlayerDialog: !this.state.showAddPlayerDialog });
+  }
+
   render () {
+    const AppBar = require('material-ui/lib/app-bar');
+    const Dialog = require('material-ui/lib/dialog');
+    const FlatButton = require('material-ui/lib/flat-button');
     const {
       disableNewPlayer,
       handleResetGame,
       handleAddPlayer
     } = this.props;
+    const addPlayerActions = [
+      { text: 'Cancel' },
+      { text: 'Add' }
+    ];
 
     return (
-      <nav className='navbar navbar-default'>
-        <div className='container' style={{paddingTop: '5px'}}>
-          <div className='row'>
-            <div className='col-md-12'>
-              <button className='btn btn-primary' onClick={handleResetGame}>Reset Game</button> &nbsp;
-              <button disabled={disableNewPlayer} className='btn btn-default' onClick={handleAddPlayer}>Add Player</button>
-            </div>
-          </div>
+      <AppBar title='MTG Toolbox' showMenuIconButton={false} iconElementRight={
+        <div>
+          <FlatButton onClick={handleResetGame} label='Reset Matchup' /> &nbsp;
+          <FlatButton disabled={disableNewPlayer} onClick={handleAddPlayer} label='Add Player' />&nbsp;
+          <FlatButton onClick={() => this.toggleAddPlayerDialog()} label='Add Player Dialog' />
         </div>
-      </nav>
+      }>
+
+        <Dialog
+          actions={addPlayerActions}
+          open={this.state.showAddPlayerDialog}
+          onRequestClose={() => this.toggleAddPlayerDialog(true)} >
+          Player
+        </Dialog>
+        </AppBar>
     );
   }
 }
