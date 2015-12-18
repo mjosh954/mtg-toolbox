@@ -13,7 +13,7 @@ Open browser to http://localhost:3000
 
 ## TODO:
 - [ ] Game Mechanics
-  - [ ] 30-sided dice randomizer
+  - [ ] 20-sided dice randomizer
   - [ ] Round Timer
   - [ ] Player Customization. (e.g. background color)
   - [ ] Add Player Dialog
