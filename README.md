@@ -20,8 +20,11 @@ Open browser to http://localhost:3000
   - [ ] Add poison counter
   - [x] Life Counter increment/decrement
   - [ ] Add Mechanics for Team formats. (e.g. Two-Headed Giant)
+  - [ ] Add Game Win/Loss Stats
 - [ ] Tournament Mode Mechanics
   - [ ] Randomize Match ups
+  - [ ] Set Max Rounds (3, 5 and 7) for each Match up in Tournament.
+- [ ] Replace JS State object with Immutable-Js
 - [ ] Improve Styling
 - [ ] Improve README.md for Contributing
 - [ ] [Tests... Tests everywhere] (http://cdn.meme.am/instances/500x/59621256.jpg)
