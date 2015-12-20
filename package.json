@@ -1,6 +1,6 @@
 {
   "name": "mtg-toolbox",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Toolbox for MTG games",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "material-ui": "^0.13.4",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
+    "react-github-fork-ribbon": "^0.4.2",
     "react-redux": "^4.0.0",
     "react-router": "1.0.1",
     "react-tap-event-plugin": "^0.2.1",

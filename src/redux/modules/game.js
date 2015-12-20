@@ -9,6 +9,11 @@ export const RESET_GAME = 'RESET_GAME';
 export const ADD_LIFE = 'ADD_LIFE';
 export const ADD_POISON = 'ADD_POISON';
 export const TOGGLE_EDIT_NAME_MODE = 'TOGGLE_EDIT_NAME_MODE';
+export const ROUND_START = 'ROUND_START';
+export const ROUND_IN_PROGRESS = 'ROUND_IN_PROGRESS';
+export const ROUND_END = 'ROUND_END';
+export const START_MATCH = 'START_MATCH';
+export const STOP_MATCH = 'STOP_MATCH';
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -18,6 +23,8 @@ export const addLife = createAction(ADD_LIFE);
 export const addPoison = createAction(ADD_POISON);
 export const toggleEditNameMode = createAction(TOGGLE_EDIT_NAME_MODE);
 export const newRound = createAction(NEW_ROUND);
+export const startMatch = createAction(START_MATCH);
+export const stopMatch = createAction(STOP_MATCH);
 
 export const actions = {
   addPlayer,
@@ -25,11 +32,14 @@ export const actions = {
   addLife,
   addPoison,
   toggleEditNameMode,
-  newRound
+  newRound,
+  startMatch,
+  stopMatch
 };
 
 const initialState = {
   round: 1,
+  roundInProgress: false,
   players: [{
     name: 'Player 1',
     life: 20,
@@ -59,6 +69,7 @@ export default handleActions({
   [NEW_ROUND]: (state) => {
     return Object.assign({}, state, {
       round: state.round + 1,
+      roundState: ROUND_START,
       players: state.players.map((player) => {
         return {
           name: player.name,
@@ -69,6 +80,18 @@ export default handleActions({
   },
   [RESET_GAME]: (state) => {
     return initialState;
+  },
+  [START_MATCH]: (state) => {
+    return { ...state, roundInProgress: true };
+    // return Object.assign({}, state, {
+    //   roundState: ROUND_IN_PROGRESS
+    // });
+  },
+  [STOP_MATCH]: (state) => {
+    return { ...state, roundInProgress: false };
+    // return Object.assign({}, state, {
+    //   roundState: ROUND_END
+    // });
   },
   [ADD_LIFE]: (state, { payload }) => {
     return Object.assign({}, state, {
