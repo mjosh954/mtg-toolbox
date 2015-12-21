@@ -20,9 +20,6 @@ export class HomeView extends React.Component {
             <div style={{marginTop: '10px'}}>
               <Dice buttonWidth='150' style={{marginTop: '5px'}} />
             </div>
-            <div style={{marginTop: '10px'}}>
-              <FlatButton linkButton label='tournament (Coming Soon)' disabled />
-            </div>
           </div>
         </div>
     );

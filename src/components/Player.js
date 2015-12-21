@@ -54,8 +54,13 @@ export default class Player extends React.Component {
           <span style={{fontSize: '1.5em'}}>{name} &nbsp; {playerMenu}</span>
         </CardHeader>
         <div style={{paddingLeft: '10px'}}>
-          <i className='fa fa-plus fa-2x' style={{color: '#11772d', cursor: 'pointer'}} onClick={handleAddLife}></i>&nbsp;&nbsp;
-          <i className='fa fa-minus fa-2x' style={{color: '#ba0000', cursor: 'pointer'}} onClick={handleRemoveLife}></i>
+          <i className='fa fa-plus fa-2x'
+            style={{color: '#11772d', cursor: 'pointer'}}
+            title='increment' onClick={handleAddLife}></i>
+            &nbsp;&nbsp;
+          <i className='fa fa-minus fa-2x'
+            style={{color: '#ba0000', cursor: 'pointer'}}
+            title='decrement' onClick={handleRemoveLife}></i>
         </div>
       </Card>
     );
