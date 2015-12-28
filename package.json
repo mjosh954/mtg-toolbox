@@ -3,6 +3,13 @@
   "version": "0.0.5",
   "description": "A Toolbox for MTG games",
   "main": "index.js",
+  "bugs": {
+    "url" : "https://github.com/mjosh954/mtg-toolbox/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjosh954/mtg-toolbox.git"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "node -r dotenv/config --harmony bin/compile",
