@@ -21,10 +21,7 @@ Open browser to http://localhost:3000
   - [x] Life Counter increment/decrement
   - [ ] Add Mechanics for Team formats. (e.g. Two-Headed Giant)
   - [ ] Add Game Win/Loss Stats
-- [ ] Tournament Mode Mechanics
-  - [ ] Randomize Match ups
-  - [ ] Set Max Rounds (3, 5 and 7) for each Match up in Tournament.
-- [ ] Draft Setup
+- [ ] Draft Mode
   - [x] Add Players
   - [ ] Edit Player
   - [ ] Remove Player
@@ -34,3 +31,11 @@ Open browser to http://localhost:3000
 - [ ] Improve Styling
 - [ ] Improve README.md for Contributing
 - [ ] [Tests... Tests everywhere] (http://cdn.meme.am/instances/500x/59621256.jpg)
+
+### Draft Mode Feature
+1. Players are able to signup for the draft
+2. After all players are registered, the host (aka. judge) will assign seating for draft by clicking 'Start Draft'
+  - Players are shuffled randomly and assigned seating.
+3. After all the packs have been drafted, the host selects 'Create Matches' 
+  - This randomly pairs each of the players for the first round.
+4. After the first round is done, then the winners will be paired with the other winners for the following round. This continues until the last winner is standing.
