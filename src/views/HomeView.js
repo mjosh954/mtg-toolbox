@@ -20,6 +20,9 @@ export class HomeView extends React.Component {
             <div style={{marginTop: '10px'}}>
               <Dice buttonWidth='150' style={{marginTop: '5px'}} />
             </div>
+            <div style={{marginTop: '10px'}}>
+              <FlatButton containerElement={<Link to='/draft/signup' />} style={{width: '150px'}} linkButton label='Draft Signup' />
+            </div>
           </div>
         </div>
     );
