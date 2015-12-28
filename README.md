@@ -24,6 +24,10 @@ Open browser to http://localhost:3000
 - [ ] Tournament Mode Mechanics
   - [ ] Randomize Match ups
   - [ ] Set Max Rounds (3, 5 and 7) for each Match up in Tournament.
+- [ ] Draft Setup
+  - [x] Add Players
+  - [ ] Edit Player
+  - [ ] Remove Player
 - [ ] Add Rules/Instructions View
   - [ ] Add link to the view on splash and counter page
 - [ ] Replace JS State object with Immutable-Js
