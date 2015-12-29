@@ -41,12 +41,11 @@ export default class Player extends React.Component {
       handleRemoveLife
     } = this.props;
 
-    const IconMenu = require('material-ui/lib/menus/icon-menu');
-    const MenuItem = require('material-ui/lib/menus/menu-item');
+    const FontIcon = require('material-ui/lib/font-icon');
     const playerMenu = (
-      <IconMenu openDirection='bottom-right' desktop iconButtonElement={<i className='fa fa-sliders' style={{cursor: 'pointer'}} />}>
-        <MenuItem disabled={this.props.roundInProgress} primaryText='Drop Player' />
-      </IconMenu>
+      <FontIcon disabled={this.props.roundInProgress} style={{cursor: 'pointer'}} hoverColor='grey'>
+        <i className='fa fa-sliders' />
+      </FontIcon>
     );
     return (
       <Card style={{margin: '25px', textAlign: 'left'}}>

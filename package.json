@@ -1,10 +1,10 @@
 {
   "name": "mtg-toolbox",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Toolbox for MTG games",
   "main": "index.js",
   "bugs": {
-    "url" : "https://github.com/mjosh954/mtg-toolbox/issues"
+    "url": "https://github.com/mjosh954/mtg-toolbox/issues"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,12 @@
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "node -r dotenv/config ./node_modules/karma/bin/karma start bin/karma.js",
     "test:dev": "npm run test -- --watch",
-    "deploy": "npm run test && npm run compile"
+    "deploy": "npm run test && npm run clean && npm run compile"
   },
   "author": "Joshua Meyers <mjosh954@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "chance": "^0.8.0",
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",

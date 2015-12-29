@@ -3,7 +3,6 @@ import { createAction, handleActions } from 'redux-actions';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const ADD_PLAYER = 'ADD_PLAYER';
 export const NEW_ROUND = 'NEW_ROUND';
 export const RESET_GAME = 'RESET_GAME';
 export const ADD_LIFE = 'ADD_LIFE';
@@ -14,10 +13,11 @@ export const ROUND_IN_PROGRESS = 'ROUND_IN_PROGRESS';
 export const ROUND_END = 'ROUND_END';
 export const START_MATCH = 'START_MATCH';
 export const STOP_MATCH = 'STOP_MATCH';
+export const ADD_MATCHUP = 'ADD_MATCHUP';
+export const UPDATE_PLAYER_MATCHUP_DETAILS = 'UPDATE_PLAYER_MATCHUP_DETAILS';
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const addPlayer = createAction(ADD_PLAYER, (value = 'player_name') => value);
 export const resetGame = createAction(RESET_GAME);
 export const addLife = createAction(ADD_LIFE);
 export const addPoison = createAction(ADD_POISON);
@@ -25,88 +25,131 @@ export const toggleEditNameMode = createAction(TOGGLE_EDIT_NAME_MODE);
 export const newRound = createAction(NEW_ROUND);
 export const startMatch = createAction(START_MATCH);
 export const stopMatch = createAction(STOP_MATCH);
+export const addMatchup = createAction(ADD_MATCHUP);
+export const updatePlayerMatchupDetails = createAction(UPDATE_PLAYER_MATCHUP_DETAILS);
 
 export const actions = {
-  addPlayer,
   resetGame,
   addLife,
   addPoison,
   toggleEditNameMode,
   newRound,
   startMatch,
-  stopMatch
+  stopMatch,
+  addMatchup
 };
 
 const initialState = {
-  round: 1,
-  roundInProgress: false,
-  players: [{
-    name: 'Player 1',
-    life: 20,
-    poisonCounter: 0,
-    editName: false
-  }, {
-    name: 'Player 2',
-    life: 20,
-    poisonCounter: 0,
-    editName: false
-  }]
+  matchups: []
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 export default handleActions({
-  [ADD_PLAYER]: (state, { payload }) => {
-    return Object.assign({}, state, {
-      players: [...state.players, {
-        name: payload,
-        life: 20,
-        poisonCounter: 0
-      }]
-    });
+  [ADD_MATCHUP]: (state) => {
+    return {
+      ...state,
+      matchups: [
+        ...state.matchups,
+        {
+          round: 1,
+          roundInProgress: false,
+          settings: {
+            startingHealthIndex: 0,
+            startingHealthOptions: [20, 30, 40]
+          },
+          players: [{
+            name: 'Player 1',
+            life: 20,
+            poisonCounter: 0,
+            editName: false
+          }, {
+            name: 'Player 2',
+            life: 20,
+            poisonCounter: 0,
+            editName: false
+          }]
+        }
+      ]
+    };
   },
-  [NEW_ROUND]: (state) => {
-    return Object.assign({}, state, {
-      round: state.round + 1,
-      roundState: ROUND_START,
-      players: state.players.map((player) => {
+  [NEW_ROUND]: (state, {payload}) => {
+    return {
+      ...state,
+      matchups: state.matchups.map((matchup, mid) => {
+        if (mid !== payload) {
+          return matchup;
+        }
         return {
-          name: player.name,
-          life: 20
+          ...matchup,
+          round: matchup.round + 1,
+          players: matchup.players.map((player) => {
+            return {
+              ...player,
+              life: matchup.settings.startingHealthOptions[matchup.settings.startingHealthIndex]
+            };
+          })
         };
       })
-    });
+    };
   },
   [RESET_GAME]: (state) => {
     return initialState;
   },
-  [START_MATCH]: (state) => {
-    return { ...state, roundInProgress: true };
-    // return Object.assign({}, state, {
-    //   roundState: ROUND_IN_PROGRESS
-    // });
+  [START_MATCH]: (state, {payload}) => {
+    return {
+      ...state,
+      matchups: state.matchups.map((matchup, mid) => {
+        if (mid !== payload) {
+          return matchup;
+        }
+        return {
+          ...matchup,
+          roundInProgress: true
+        };
+      })
+    };
   },
-  [STOP_MATCH]: (state) => {
-    return { ...state, roundInProgress: false };
-    // return Object.assign({}, state, {
-    //   roundState: ROUND_END
-    // });
+  [STOP_MATCH]: (state, {payload}) => {
+    return {
+      ...state,
+      matchups: state.matchups.map((matchup, mid) => {
+        if (mid !== payload) {
+          return matchup;
+        }
+        return {
+          ...matchup,
+          roundInProgress: false
+        };
+      })
+    };
   },
   [ADD_LIFE]: (state, { payload }) => {
-    return Object.assign({}, state, {
-      players: state.players.map((player, index) => {
-        if (payload.index === index) {
-          return Object.assign({}, player, {
-            life: player.life + payload.value
-          });
+    return {
+      ...state,
+      matchups: state.matchups.map((matchup, index) => {
+        if (index !== payload.mid) {
+          return matchup;
         }
-        return player;
+        return {
+          ...matchup,
+          players: matchup.players.map((player, playerIndex) => {
+            if (playerIndex !== payload.playerIndex) {
+              return player;
+            }
+            return {
+              ...player,
+              life: player.life + payload.value
+            };
+          })
+        };
       })
-    });
+    };
   },
   [ADD_POISON]: (state, { payload }) => {
-    return Object.assign({}, state, {
+    return {
+      ...state,
       players: state.players.map((player, index) => {
         if (payload.index === index) {
           return Object.assign({}, player, {
@@ -115,7 +158,7 @@ export default handleActions({
         }
         return player;
       })
-    });
+    };
   },
   [TOGGLE_EDIT_NAME_MODE]: (state, { payload }) => {
     return Object.assign({}, state, {
@@ -128,5 +171,8 @@ export default handleActions({
         return player;
       })
     });
+  },
+  [UPDATE_PLAYER_MATCHUP_DETAILS]: (state, { payload }) => {
+    return state;
   }
 }, initialState);

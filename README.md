@@ -12,11 +12,11 @@ $ npm start
 Open browser to http://localhost:3000
 
 ## TODO:
-- [ ] Game Mechanics
+- [ ] Game Match-up Mechanics
   - [x] 6 & 20-sided dice randomizer
   - [ ] Round Timer
   - [ ] Player Customization. (e.g. background color)
-  - [ ] Add Player Dialog
+  - [ ] Edit Player Dialog
   - [ ] Add poison counter
   - [x] Life Counter increment/decrement
   - [ ] Add Mechanics for Team formats. (e.g. Two-Headed Giant)
@@ -36,6 +36,6 @@ Open browser to http://localhost:3000
 1. Players are able to signup for the draft
 2. After all players are registered, the host (aka. judge) will assign seating for draft by clicking 'Start Draft'
   - Players are shuffled randomly and assigned seating.
-3. After all the packs have been drafted, the host selects 'Create Matches' 
+3. After all the packs have been drafted, the host selects 'Create Matches'
   - This randomly pairs each of the players for the first round.
 4. After the first round is done, then the winners will be paired with the other winners for the following round. This continues until the last winner is standing.
