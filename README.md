@@ -16,7 +16,7 @@ Open browser to http://localhost:3000
   - [x] 6 & 20-sided dice randomizer
   - [ ] Round Timer
   - [ ] Player Customization. (e.g. background color)
-  - [ ] Edit Player Dialog
+    - [ ] Edit Player Dialog
   - [ ] Add poison counter
   - [x] Life Counter increment/decrement
   - [ ] Add Mechanics for Team formats. (e.g. Two-Headed Giant)
