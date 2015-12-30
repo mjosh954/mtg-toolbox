@@ -1,5 +1,10 @@
 import React, { PropTypes } from 'react';
 import DiceResultsList from './DiceResultsList';
+import DiceSettings from './DiceSettings';
+import Dialog from 'material-ui/lib/dialog';
+import RaisedButton from 'material-ui/lib/raised-button';
+import FlatButton from 'material-ui/lib/flat-button';
+
 export default class Dice extends React.Component {
 
   static propTypes = {
@@ -41,34 +46,21 @@ export default class Dice extends React.Component {
   }
 
   toggleDiceDialog (close) {
-    if (close) {
-      this.setState({
-        diceDialogOpen: false,
-        diceResult: '',
-        enable20SidedDie: false,
-        resultHistory: []
-      });
-      return;
-    }
     this.setState({
-      diceDialogOpen: !this.state.diceDialogOpen,
       diceResult: '',
       enable20SidedDie: false,
-      resultHistory: []
+      resultHistory: [],
+      diceDialogOpen: close ? false : !this.state.diceDialogOpen
     });
   }
 
   render () {
-    const RaisedButton = require('material-ui/lib/raised-button');
-    const FlatButton = require('material-ui/lib/flat-button');
-    const Dialog = require('material-ui/lib/dialog');
-    const Toggle = require('material-ui/lib/toggle');
-    const List = require('material-ui/lib/lists/list');
-    const ListItem = require('material-ui/lib/lists/list-item');
+    const resetHistory = () => this.setState({resultHistory: []});
+    const toggleSides = () => this.setState({enable20SidedDie: !this.state.enable20SidedDie});
     return (
       <div>
         <FlatButton style={{width: `${this.props.buttonWidth}px`}} label='Dice' onTouchTap={() => this.toggleDiceDialog() }/>
-        <Dialog autoScrollBodyContent autoDetectWindowHeight={false} open={this.state.diceDialogOpen}
+        <Dialog autoScrollBodyContent open={this.state.diceDialogOpen}
           onRequestClose={() => this.setState({diceDialogOpen: false})}
           actions={[<RaisedButton label='Close' onTouchTap={() => this.toggleDiceDialog(true)} />
           ]}>
@@ -78,17 +70,12 @@ export default class Dice extends React.Component {
               style={{marginBottom: '5px'}}
               label={this.state.isRolling ? <i className='fa fa-spinner fa-pulse'></i> : 'Roll'}
               disabled={this.state.isRolling}
-              onClick={() => this.rollDie()} />
+              onClick={this.rollDie} />
           </div>
-          <List style={{border: '1px solid #d4d4d4', textAlign: 'left'}} subheader='Dice Settings'>
-            <ListItem>
-              <Toggle label='20 Sided' labelPosition={'left'}
-                onToggle={() => this.setState({enable20SidedDie: !this.state.enable20SidedDie})}
-                value={this.state.enable20SidedDie}
-                />
-            </ListItem>
-          </List>
-          {this.state.resultHistory.length > 0 ? <DiceResultsList results={this.state.resultHistory} /> : null}
+          <DiceSettings
+            twentySidedEnabled={this.state.enable20SidedDie}
+            handleSidedToggle={toggleSides} />
+          <DiceResultsList handleClearResults={resetHistory} results={this.state.resultHistory} />
         </Dialog>
       </div>
     );

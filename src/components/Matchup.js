@@ -28,7 +28,6 @@ export default class Matchup extends React.Component {
 
   render () {
     const Card = require('material-ui/lib/card/card');
-    const AppBar = require('material-ui/lib/app-bar');
     const CardHeader = require('material-ui/lib/card/card-header');
     const {
       players,

@@ -3,6 +3,7 @@ import { routeReducer } from 'redux-simple-router';
 import game from './game';
 import signup from './signup';
 import draft from './draft';
+import dice from './dice';
 import modifyPlayer from './modifyPlayer';
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   signup,
   modifyPlayer,
   draft,
+  dice,
   router: routeReducer
 });
