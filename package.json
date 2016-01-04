@@ -27,6 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "chance": "^0.8.0",
+    "classnames": "^2.2.2",
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",

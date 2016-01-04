@@ -62,13 +62,11 @@ export default handleActions({
           players: [{
             name: 'Player 1',
             life: 20,
-            poisonCounter: 0,
-            editName: false
+            poisonCounter: 0
           }, {
             name: 'Player 2',
             life: 20,
-            poisonCounter: 0,
-            editName: false
+            poisonCounter: 0
           }]
         }
       ]
